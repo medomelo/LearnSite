@@ -10,11 +10,11 @@ app.listen(port, () => console.log(`Example app listening on port ${port}!`))
 const express = require('express');
 const path = require('path');
 const app = express();
-
-app.use(express.static(path.join(__dirname, 'public')));
+//Static middleware
+//app.use(express.static(path.join(__dirname, 'public')));
 
 app.set('port', process.env.PORT || 3000);
-
+// dynamic pages
 const handlebars = require('express-handlebars');
 app.engine('handlebars', handlebars.engine({ defaultLayout:'main' }));
 app.set('view engine', 'handlebars');
