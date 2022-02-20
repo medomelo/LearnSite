@@ -10,9 +10,18 @@ app.listen(port, () => console.log(`Example app listening on port ${port}!`))
 const express = require('express');
 const path = require('path');
 const app = express();
-//Static middleware
-//app.use(express.static(path.join(__dirname, 'public')));
+const fortunes= [
+    "Conquer your fears or they will conquer you.",
+    "Rivers need springs.",
+    "Do not fear what you don't know.",
+    "You wifortunesll have a pleasant surprise.",
+    "Whenever possible, keep it simple.",
+]
 
+
+
+//Static middleware
+app.use(express.static(__dirname +'/public'));
 app.set('port', process.env.PORT || 3000);
 // dynamic pages
 const handlebars = require('express-handlebars');
@@ -30,7 +39,10 @@ app.get('/',function(req,res){
 app.get('/about',function(req,res){
    /* res.type('text/plain');
     res.send('ABOUT TRAVEL');*/
-    res.render('about');
+   // res.render('about');
+   let randomFortunes=fortunes[Math.floor(Math.random()*fortunes.length)];
+   res.render('about',{fortune:randomFortunes});
+
 });
 
 
@@ -54,10 +66,8 @@ app.use(function(err,req,res,next){
     res.render('500');
 });
 //app.use(express.static(path.join(__dirname, 'public')));
-//app.use(express.static(__dirname +'/public'));
+
 //app.use(express.static('public'))
-
-
 
 app.listen(app.get('port'),function(){
     console.log( 'Express started on http://localhost:' +
