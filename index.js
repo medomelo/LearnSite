@@ -14,7 +14,7 @@ const fortunes= [
     "Conquer your fears or they will conquer you.",
     "Rivers need springs.",
     "Do not fear what you don't know.",
-    "You wifortunesll have a pleasant surprise.",
+    "You have a pleasant surprise.",
     "Whenever possible, keep it simple.",
 ]
 
