@@ -10,13 +10,7 @@ app.listen(port, () => console.log(`Example app listening on port ${port}!`))
 const express = require('express');
 const path = require('path');
 const app = express();
-const fortunes= [
-    "Conquer your fears or they will conquer you.",
-    "Rivers need springs.",
-    "Do not fear what you don't know.",
-    "You have a pleasant surprise.",
-    "Whenever possible, keep it simple.",
-]
+const fortune = require('./library/fortune.js');
 
 
 
@@ -37,18 +31,15 @@ app.get('/',function(req,res){
 
 //ABOUT routs
 app.get('/about',function(req,res){
-   /* res.type('text/plain');
-    res.send('ABOUT TRAVEL');*/
-   // res.render('about');
-   let randomFortunes=fortunes[Math.floor(Math.random()*fortunes.length)];
-   res.render('about',{fortune:randomFortunes});
+
+   res.render('about',{fortune:fortune.getFortune()});
 
 });
 
 
 // custom 404 page
 app.use(function(req,res){
-   /* res.type('text/html');
+   /* res.type('text/html');/*res.type('text/plain');
     res.status(404);
     res.send('<h1>404 -NOT FOUND</h1>');*/
     res.status(404);
@@ -60,7 +51,7 @@ app.use(function(err,req,res,next){
    /* console.error(err.stack);
     res.type('text/plain');
     res.status(500);
-    res.send('500 -SERVER ERROR');*/
+    res.send(var'500 -SERVER ERROR');*/
     console.error(err.stack);
     res.status(500);
     res.render('500');
