@@ -21,7 +21,12 @@ app.set('port', process.env.PORT || 3000);
 const handlebars = require('express-handlebars');
 app.engine('handlebars', handlebars.engine({ defaultLayout:'main' }));
 app.set('view engine', 'handlebars');
-
+app.use(function(req, res, next){
+    res.locals.showTests = app.get('env') !== 'production' &&
+    req.query.test === '1';
+    next();
+    });
+    // routes go here....
 //home routs
 app.get('/',function(req,res){
     /*res.type('text/plain');
@@ -32,7 +37,7 @@ app.get('/',function(req,res){
 //ABOUT routs
 app.get('/about',function(req,res){
 
-   res.render('about',{fortune:fortune.getFortune()});
+   res.render('about',{med:fortune.getFortune(),pageTestScript: '/qa/tests-about.js'});
 
 });
 
